@@ -9,4 +9,6 @@ public interface PostService {
     public List<PostEntityDto> getAllPost();
     public PostEntityDto createPostEntity(PostEntityDto postEntityDto);
     public PostEntityDto getPostEntityById(Long id);
+
+    PostEntityDto updatePost(Long postId, PostEntityDto updatedDto);
 }

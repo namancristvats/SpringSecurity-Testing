@@ -13,7 +13,7 @@ import lombok.*;
 @NoArgsConstructor
 @Builder
 @ToString
-public class PostEntity {
+public class PostEntity extends AuditingEntity{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

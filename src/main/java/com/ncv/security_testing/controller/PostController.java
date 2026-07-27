@@ -40,9 +40,11 @@ public class PostController {
         return new ResponseEntity<>(postService.createPostEntity(postEntityDto), HttpStatus.CREATED);
     }
 
-    @GetMapping("/{postId}")
-    @PreAuthorize("hasRole('USER') or hasRole('CREATOR') or hasRole('ADMIN')")
-    public ResponseEntity<PostEntityDto> getPostById(@PathVariable Long postId) {
-        return new ResponseEntity<>(postService.getPostEntityById(postId), HttpStatus.OK);
+    @PutMapping("/{postId}")
+    @PreAuthorize("hasRole('CREATOR') or hasRole('ADMIN')")
+    public ResponseEntity<PostEntityDto> getPostById(@PathVariable Long postId,@RequestBody PostEntityDto updatedDto) {
+        PostEntityDto postEntityDto=postService.updatePost(postId,updatedDto);
+        return new ResponseEntity<>(postEntityDto,HttpStatus.CREATED);
+
     }
 }
