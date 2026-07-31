@@ -27,11 +27,15 @@ public class PostController {
 //        return "Post created";
 //    }
     private final PostService postService;
+    private final int PAGE_SIZE=5;
 
     @GetMapping
     @Secured("ROLE_USER")
-    public ResponseEntity<List<PostEntityDto>> getAllPost() {
-        return new ResponseEntity<>(postService.getAllPost(), HttpStatus.OK);
+    public ResponseEntity<List<PostEntityDto>> getAllPost(
+            @RequestParam String sortBy,
+            @RequestParam(defaultValue = "1") Integer pageNumber
+    ) {
+        return new ResponseEntity<>(postService.getAllPost(pageNumber,PAGE_SIZE,sortBy), HttpStatus.OK);
     }
 
     @PostMapping("/create")

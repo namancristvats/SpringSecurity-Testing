@@ -6,7 +6,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 public interface PostService {
-    public List<PostEntityDto> getAllPost();
+    public List<PostEntityDto> getAllPost(int pageNumber,int pageSize,String sortBy);
     public PostEntityDto createPostEntity(PostEntityDto postEntityDto);
     public PostEntityDto getPostEntityById(Long id);
 

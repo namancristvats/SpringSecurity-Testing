@@ -6,6 +6,9 @@ import com.ncv.security_testing.repository.PostRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -19,8 +22,9 @@ public class PostServiceImpl implements PostService{
     private final ModelMapper modelMapper;
 
     @Override
-    public List<PostEntityDto> getAllPost() {
-        List<PostEntity> postEntities=postRepository.findAll();
+    public List<PostEntityDto> getAllPost(int pageNUmber,int pageSize,String sortBy) {
+        Pageable pageable= PageRequest.of(pageNUmber,pageSize,Sort.by(sortBy).descending());
+        List<PostEntity> postEntities=postRepository.findAll(pageable).getContent();
         List<PostEntityDto> entitiesDtos=postEntities.stream()
                 .map(entity->modelMapper.map(entity,PostEntityDto.class)).collect(Collectors.toList());
         return entitiesDtos;
